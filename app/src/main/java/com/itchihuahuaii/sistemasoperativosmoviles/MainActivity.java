@@ -3,6 +3,7 @@ package com.itchihuahuaii.sistemasoperativosmoviles;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -89,9 +90,13 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,new FragmentRSS()).commit();
         } else if (id == R.id.nav_share) {
-
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,new FragmentFont()).commit();
         } else if (id == R.id.nav_send) {
-
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,new FragmentJSON()).commit();
+        }else if (id == R.id.nav_serv) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,new FragmentServices()).commit();
+        }else if (id == R.id.nav_volley) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,new FragmentVolley()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

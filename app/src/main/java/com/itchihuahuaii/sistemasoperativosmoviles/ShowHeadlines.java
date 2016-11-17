@@ -18,18 +18,19 @@ import java.util.ArrayList;
 /**
  * Created by usuario1 on 11/12/2016.
  */
-public class ShowHeadlines extends Activity{
+public class ShowHeadlines extends Activity {
     ArrayList<SingleItem> newsList = new ArrayList<SingleItem>();
     ListView myListView;
     String urlAddress = "";
     String urlCaption = "";
     SingleItem selectedNewsItem;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_rss);
-        myListView = (ListView)this.findViewById(R.id.listView);
-// find out which intent is calling us
+        myListView = (ListView) this.findViewById(R.id.listView);
+        // find out which intent is calling us
         Intent callingIntent = getIntent();
 // grab data bundle holding selected url & caption sent to us
         Bundle myBundle = callingIntent.getExtras();
@@ -38,7 +39,7 @@ public class ShowHeadlines extends Activity{
         // update app's top 'TitleBar' (eg. 'NPR - Business Wed April 09, 2014')
         this.setTitle("NPR - " + urlCaption + " \t" + FragmentRSS.niceDate());
 // clicking on a row shows dialogBox with more info about selected item
-        myListView = (ListView)this.findViewById(R.id.listView);
+        myListView = (ListView) this.findViewById(R.id.listView);
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> av, View v,
                                     int index, long id) {
@@ -50,13 +51,14 @@ public class ShowHeadlines extends Activity{
         DownloadRssFeed downloader = new DownloadRssFeed(ShowHeadlines.this);
         downloader.execute(urlAddress, urlCaption);
     }//onCreate
+
     public void showNiceDialogBox(SingleItem selectedStoryItem,
-                                  Context context){
+                                  Context context) {
 // make a nice looking dialog box (story summary, btnClose, btnMore)
 // CAUTION: (check)on occasions title and description are the same!
         String title = selectedStoryItem.getTitle();
         String description = selectedStoryItem.getDescription();
-        if (title.toLowerCase().equals(description.toLowerCase())){
+        if (title.toLowerCase().equals(description.toLowerCase())) {
             description = "";
         }
         try {
@@ -65,8 +67,8 @@ public class ShowHeadlines extends Activity{
             AlertDialog.Builder myBuilder = new AlertDialog.Builder(this);
             myBuilder
                     .setIcon(R.drawable.ic_menu_gallery)
-                    .setTitle(Html.fromHtml(urlCaption) )
-                    .setMessage( title + "\n\n" + Html.fromHtml(description) + "\n" )
+                    .setTitle(Html.fromHtml(urlCaption))
+                    .setMessage(title + "\n\n" + Html.fromHtml(description) + "\n")
                     .setPositiveButton("Close", null)
                     .setNegativeButton("More", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichOne) {
@@ -76,7 +78,7 @@ public class ShowHeadlines extends Activity{
                     })//setNegativeButton
                     .show();
         } catch (Exception e) {
-            Log.e("Error DialogBox", e.getMessage() );
+            Log.e("Error DialogBox", e.getMessage());
         }
     }//showNiceDialogBox
 }//ShowHeadlines

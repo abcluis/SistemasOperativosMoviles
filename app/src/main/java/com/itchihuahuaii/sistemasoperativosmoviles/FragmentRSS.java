@@ -77,16 +77,17 @@ public class FragmentRSS extends Fragment {
         });
 // fill up the Main-GUI’s ListView with main news categories
         adapterMainSubjects = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_list_item_1,myUrlCaption);
+                android.R.layout.simple_list_item_1, myUrlCaption);
         //android's default myUrlCaption);
         myMainListView.setAdapter(adapterMainSubjects);
 
 
-    // method returns a value such as "Monday Apr 7, 2014"
+        // method returns a value such as "Monday Apr 7, 2014"
 
 
-    return view;
-}
+        return view;
+    }
+
     public static String niceDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("EE MMM d, yyyy ", Locale.US);
         return sdf.format(new Date());
